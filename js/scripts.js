@@ -48,7 +48,20 @@ $(function(){
     }
 
     loadPhoto(currentPhoto);
-
+  
+    imagesData.forEach((item, index) => {
+        $('#thumbnails').append(`<div class="thumbnail" data-number="${index}">
+                                    <img src="${item.photo}" data-number="${index}" alt="">
+                                </div>`)
+        $(`.thumbnail[data-number=${currentPhoto}]`).css('border-color', 'white')
+        $('.thumbnail').click((event) => {
+            let betolt = parseInt($(event.target).attr('data-number'))
+            loadPhoto(betolt) 
+            $(`.thumbnail[data-number=${betolt}]`).css('border-color', 'white')
+            $(`.thumbnail[data-number!=${betolt}]`).css('border-color', 'rgb(170, 19, 19)')
+        })                        
+    })
+    
     $('#left').click(() => {
         if(currentPhoto>0){
             currentPhoto--;
@@ -56,6 +69,8 @@ $(function(){
             currentPhoto = imagesData.length-1
         }
         loadPhoto(currentPhoto);
+        $(`.thumbnail[data-number=${currentPhoto}]`).css('border-color', 'white')
+        $(`.thumbnail[data-number!=${currentPhoto}]`).css('border-color', 'rgb(170, 19, 19)')
     })
 
     $('#right').click(() => {
@@ -65,18 +80,8 @@ $(function(){
             currentPhoto = 0;
         }
         loadPhoto(currentPhoto);
-    })
-
-    imagesData.forEach((item, index) => {
-        $('#thumbnails').append(`<div class="thumbnail" data-number="${index}">
-                                    <img src="${item.photo}" data-number="${index}" alt="">
-                                </div>`)
-        $('.thumbnail').click((event) => {
-            let betolt = parseInt($(event.target).attr('data-number'))
-            loadPhoto(betolt) 
-            $(`.thumbnail[data-number=${betolt}]`).css('border-color', 'white')
-            $(`.thumbnail[data-number!=${betolt}]`).css('border-color', 'rgb(170, 19, 19)')
-        })                        
+        $(`.thumbnail[data-number=${currentPhoto}]`).css('border-color', 'white')
+        $(`.thumbnail[data-number!=${currentPhoto}]`).css('border-color', 'rgb(170, 19, 19)')
     })
 
     imagesData.forEach((item, index) => {
