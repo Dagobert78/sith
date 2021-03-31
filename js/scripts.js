@@ -73,7 +73,9 @@ $(function(){
                                 </div>`)
         $('.thumbnail').click((event) => {
             let betolt = parseInt($(event.target).attr('data-number'))
-            loadPhoto(betolt)
+            loadPhoto(betolt) 
+            $(`.thumbnail[data-number=${betolt}]`).css('border-color', 'white')
+            $(`.thumbnail[data-number!=${betolt}]`).css('border-color', 'rgb(170, 19, 19)')
         })                        
     })
 
@@ -84,8 +86,8 @@ $(function(){
     $('.thumbnail').mouseover((event) => {
         let betolt = parseInt($(event.target).attr('data-number'))
 
-       let offst = $(`.thumbnail[data-number=${betolt}]`).offset().top -35
-       let offsl = $(`.thumbnail[data-number=${betolt}]`).offset().left -15
+       let offst = $(`.thumbnail[data-number=${betolt}]`).offset().top -40
+       let offsl = $(`.thumbnail[data-number=${betolt}]`).offset().left -20
 
         $(`.title[data-number=${betolt}]`).css('position', 'absolute')
 
